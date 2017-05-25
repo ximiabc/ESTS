@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.lzf.ests.pro.entity.Paper" table="t_paper">
+		<!--主键 -->
+		<id name="id" column="Id" type="integer">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" type="string"></property>
+		<property name="info" type="string"></property>
+		<!-- 关联班级-->
+		<many-to-one name="classes" class="cn.lzf.ests.pro.entity.Classes" column="class_paper"></many-to-one>
+		<set name="questions"  lazy="false" cascade="all" inverse="true">
+			<key column="paper_question"></key>
+			<one-to-many class="cn.lzf.ests.pro.entity.Question"/>
+		</set>
+		<set name="answerPapers"  lazy="false" cascade="all" inverse="true">
+			<key column="answer_paper"></key>
+			<one-to-many class="cn.lzf.ests.pro.entity.AnswerPaper"/>
+		</set>
+	</class>
+</hibernate-mapping>
